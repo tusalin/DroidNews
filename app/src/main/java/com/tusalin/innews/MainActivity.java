@@ -12,9 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.tusalin.innews.fragment.EntertainmentFragment;
-import com.tusalin.innews.fragment.HomeFragment;
-import com.tusalin.innews.fragment.TechnologyFragment;
+import com.tusalin.innews.Fragment.EntertainmentFragment;
+import com.tusalin.innews.Fragment.HomeFragment;
+import com.tusalin.innews.Fragment.TechnologyFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.menu_home:
                         homeFragment = new HomeFragment();
                         fragmentTransaction.replace(R.id.framelaoyout,homeFragment);
-                        toobar.setTitle("Home");
+                        toobar.setTitle("Tablayout");
                         break;
                     case R.id.menu_technology:
                         technologyFragment = new TechnologyFragment();

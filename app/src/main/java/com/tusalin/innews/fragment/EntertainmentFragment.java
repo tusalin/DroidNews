@@ -1,4 +1,4 @@
-package com.tusalin.innews.fragment;
+package com.tusalin.innews.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
