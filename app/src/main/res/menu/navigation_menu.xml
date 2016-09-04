@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:title="Home"
+            android:icon="@drawable/icon_home"
+            android:id="@+id/menu_home"></item>
+        <item
+            android:title="Technology"
+            android:id="@+id/menu_technology"
+            android:icon="@drawable/icon_tech"></item>
+        <item
+            android:title="Entertainment"
+            android:id="@+id/menu_entertainment"
+            android:icon="@drawable/icon_entertainment"></item>
+        <item
+            android:title="Me">
+            <menu>
+                <group
+                    android:checkableBehavior="single">
+                    <item
+                        android:title="User Profile"></item>
+                    <item
+                        android:title="App Settings"></item>
+                </group>
+            </menu>
+        </item>
+    </group>
+</menu>
