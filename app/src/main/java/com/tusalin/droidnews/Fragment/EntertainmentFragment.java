@@ -1,4 +1,4 @@
-package com.tusalin.innews.Fragment;
+package com.tusalin.droidnews.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,11 +13,11 @@ import com.tusalin.innews.R;
  * Created by tusalin on 9/4/2016.
  */
 
-public class TechnologyFragment extends Fragment {
+public class EntertainmentFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_technology,container,false);
+        View view = inflater.inflate(R.layout.fragment_entertainment,container,false);
         return view;
     }
 }

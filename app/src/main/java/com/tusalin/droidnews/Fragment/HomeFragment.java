@@ -1,4 +1,4 @@
-package com.tusalin.innews.Fragment;
+package com.tusalin.droidnews.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tusalin.innews.Adapter.MyViewPagerAdapter;
+import com.tusalin.droidnews.Adapter.MyViewPagerAdapter;
 import com.tusalin.innews.R;
 
 /**
@@ -38,9 +38,6 @@ public class HomeFragment extends Fragment {
 
         viewPager.setAdapter(adapter);
         tablayout.setupWithViewPager(viewPager);
-        /*for (int i = 0;i < tabTitle.length;i++){
-            tablayout.addTab(tablayout.newTab().setText(tabTitle[i]));
-        }*/
         tablayout.setTabMode(TabLayout.MODE_FIXED);
         return view;
     }
