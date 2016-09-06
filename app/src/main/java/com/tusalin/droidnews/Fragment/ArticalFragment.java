@@ -23,7 +23,7 @@ import static com.tusalin.droidnews.GankUrl.GANK_API_TUOZHAN;
  * Created by tusalin on 9/6/2016.
  */
 
-public class ArticalFragment extends Fragment {
+public class ArticalFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private String keyType;
     private FragmentType fragmentType;
@@ -59,10 +59,21 @@ public class ArticalFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerview = (RecyclerView) view.findViewById(R.id.artical_recyclerview);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.artical_swiperefresh);
+        swipeRefreshLayout.setOnRefreshListener(this);
         setAdapter();
         setDefaultLayoutManager();
         recyclerview.setAdapter(articalAdapter);
         recyclerview.setLayoutManager(layoutManager);
+    }
+
+    @Override
+    public void onRefresh() {
+
+    }
+
+    public void requestGank(boolean isrRefresh){
+        swipeRefreshLayout.measure(View.MEASURED_SIZE_MASK,View.MEASURED_HEIGHT_STATE_SHIFT);
+        swipeRefreshLayout.setRefreshing(true);
     }
 
     public void setAdapter(){

@@ -11,6 +11,13 @@ import java.util.List;
  * Created by tusalin on 9/4/2016.
  */
 
+/*
+*
+*    This Adapter is used to associate tablayout with viwepager so that the tab can bee switched
+*     by sliding
+*
+* */
+
 public class HomeAdapter extends FragmentStatePagerAdapter {
 
     private List<String> mFragmentTitle = new ArrayList<>();
