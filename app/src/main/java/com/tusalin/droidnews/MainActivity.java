@@ -12,9 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.tusalin.droidnews.Fragment.TechnologyFragment;
+import com.tusalin.droidnews.Fragment.ArticalFragment;
 import com.tusalin.droidnews.Fragment.EntertainmentFragment;
 import com.tusalin.droidnews.Fragment.HomeFragment;
+import com.tusalin.droidnews.Fragment.TechnologyFragment;
 import com.tusalin.innews.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationview;
     private TechnologyFragment technologyFragment;
     private EntertainmentFragment entertainmentFragment;
+    private ArticalFragment articalFragment;
 
 
     @Override

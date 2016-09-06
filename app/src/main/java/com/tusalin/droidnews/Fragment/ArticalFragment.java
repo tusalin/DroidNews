@@ -14,13 +14,12 @@ import android.widget.Toast;
 
 import com.tusalin.droidnews.Adapter.ArticalAdapter;
 import com.tusalin.droidnews.Bean.GankNews;
+import com.tusalin.droidnews.Callback.OnRecyclerViewItemClickListener;
 import com.tusalin.droidnews.Callback.RetrofitCallBack;
 import com.tusalin.droidnews.FragmentType;
 import com.tusalin.droidnews.Network.DefaultRetrofit;
 import com.tusalin.innews.R;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.tusalin.droidnews.GankUrl.GANK_API_ANDROID;
 import static com.tusalin.droidnews.GankUrl.GANK_API_MEIZI;
@@ -42,6 +41,7 @@ public class ArticalFragment extends Fragment{
     private int contentQuantity = 10;
     private GankNews articals;
     private GankNews girls;
+    private int lastVisibleItem;
 
     public ArticalFragment(){
         super();
@@ -76,21 +76,62 @@ public class ArticalFragment extends Fragment{
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-                requestGank();
+                requestGank(false);
             }
         });
         setAdapter();
         setDefaultLayoutManager();
+        articalAdapter.setOnRecyclerViewItemClick(new OnRecyclerViewItemClickListener() {
+            @Override
+            public void onRecyclerViewItemClick(ArticalAdapter.ArticalViewHolder viewHolder, int position, View view) {
+                Toast.makeText(getContext(),"click "+ position,Toast.LENGTH_SHORT).show();
+            }
+        });
         recyclerview.setAdapter(articalAdapter);
         recyclerview.setLayoutManager(layoutManager);
+
+        recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem == layoutManager.getItemCount()-1){
+                    requestGank(true);
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                lastVisibleItem = findLastVisibleItem();
+            }
+        });
     }
 
+    private int findLastVisibleItem() {
+        int lastVisibleItemPosition = 0;
+        RecyclerView.LayoutManager layoutManager = recyclerview.getLayoutManager();
+        switch (fragmentType){
+            case Android:
+                lastVisibleItemPosition = ((LinearLayoutManager)layoutManager).findLastVisibleItemPosition();
+                break;
+            case xiatuijian:
+            case tuozhanziyuan:
+                lastVisibleItemPosition = ((GridLayoutManager)layoutManager).findLastVisibleItemPosition();
+                break;
+        }
+        return lastVisibleItemPosition;
+    }
 
-    public void requestGank(){
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        requestGank(false);
+    }
+
+    public void requestGank(boolean loadMore){
         swipeRefreshLayout.measure(View.MEASURED_SIZE_MASK,View.MEASURED_HEIGHT_STATE_SHIFT);
         swipeRefreshLayout.setRefreshing(true);
-//        contentQuantity += 10;
+        if (loadMore){
+            contentQuantity += 10;
+        }
         DefaultRetrofit.getAllResult(keyType,contentQuantity,1,retrofitCallBack);
 
     }

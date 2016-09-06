@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.tusalin.droidnews.Bean.GankNews;
+import com.tusalin.droidnews.Callback.OnRecyclerViewItemClickListener;
 import com.tusalin.droidnews.FragmentType;
 import com.tusalin.innews.R;
 
@@ -26,6 +27,7 @@ public class ArticalAdapter extends RecyclerView.Adapter<ArticalAdapter.ArticalV
     private List<GankNews.Results> articalResults = new ArrayList<>();
     private List<GankNews.Results> girlResults = new ArrayList<>();
     private Context context;
+    private OnRecyclerViewItemClickListener mOnRecyclerViewItemClickListener;
 
     public ArticalAdapter(FragmentType type, Context context){
         fragmentType = type;
@@ -85,21 +87,37 @@ public class ArticalAdapter extends RecyclerView.Adapter<ArticalAdapter.ArticalV
                         parent,false);
                 break;
         }
+        ArticalViewHolder viewHolder = new ArticalViewHolder(view,mOnRecyclerViewItemClickListener);
+        return viewHolder;
 
-
-        return new ArticalViewHolder(view);
     }
 
     public class ArticalViewHolder extends RecyclerView.ViewHolder{
         private ImageView imageView;
         private TextView textViewTitle;
         private TextView textViewDate;
+        private OnRecyclerViewItemClickListener onItemClickListener;
 
-        public ArticalViewHolder(View view){
+        public ArticalViewHolder(View view,OnRecyclerViewItemClickListener listener){
             super(view);
+            onItemClickListener = listener;
             imageView = (ImageView) view.findViewById(R.id.cardview_artical_image);
             textViewDate = (TextView) view.findViewById(R.id.cardview_artical_date);
             textViewTitle = (TextView) view.findViewById(R.id.cardview_artical_title);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onItemClickListener!=null){
+                        onItemClickListener.onRecyclerViewItemClick(ArticalViewHolder.this,
+                                getLayoutPosition(),view);
+                    }
+                }
+            });
         }
+
+    }
+
+    public void setOnRecyclerViewItemClick(OnRecyclerViewItemClickListener onRecyclerViewItemClickListener){
+        mOnRecyclerViewItemClickListener = onRecyclerViewItemClickListener;
     }
 }
