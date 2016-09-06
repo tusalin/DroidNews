@@ -17,12 +17,12 @@ import java.util.List;
  * Created by tusalin on 9/4/2016.
  */
 
-public class TabAdapter extends RecyclerView.Adapter<TabAdapter.MyViewHolder> {
+public class TabRecyclerviewAdapter extends RecyclerView.Adapter<TabRecyclerviewAdapter.MyViewHolder> {
     private Context mContext;
     private LayoutInflater mInflater;
     private List<NewsItem> mNewsItems;
 
-    public TabAdapter(Context context,List<NewsItem> items){
+    public TabRecyclerviewAdapter(Context context, List<NewsItem> items){
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
         mNewsItems = items;

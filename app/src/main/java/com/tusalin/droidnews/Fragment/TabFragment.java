@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tusalin.droidnews.Bean.NewsItem;
-import com.tusalin.droidnews.Adapter.TabAdapter;
+import com.tusalin.droidnews.Adapter.TabRecyclerviewAdapter;
 import com.tusalin.innews.R;
 
 import java.util.ArrayList;
@@ -25,20 +25,20 @@ import java.util.List;
 public class TabFragment extends Fragment{
 
     private RecyclerView recyclerview;
-    private TabAdapter tabAdapter;
+    private TabRecyclerviewAdapter mTabRecyclerviewAdapter;
     private List<NewsItem> newsItem;
     private SwipeRefreshLayout swipetrefreshlayout;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_tab,container,false);
-        recyclerview = (RecyclerView) view.findViewById(R.id.tab_recyclerview);
+        View view = inflater.inflate(R.layout.fragment_artical,container,false);
+        recyclerview = (RecyclerView) view.findViewById(R.id.artical_recyclerview);
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         initNewsItem();
-        tabAdapter = new TabAdapter(getContext(),newsItem);
-        recyclerview.setAdapter(tabAdapter);
-        swipetrefreshlayout = (SwipeRefreshLayout) view.findViewById(R.id.tab_swiperefresh);
+        mTabRecyclerviewAdapter = new TabRecyclerviewAdapter(getContext(),newsItem);
+        recyclerview.setAdapter(mTabRecyclerviewAdapter);
+        swipetrefreshlayout = (SwipeRefreshLayout) view.findViewById(R.id.artical_swiperefresh);
         swipetrefreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -80,7 +80,7 @@ public class TabFragment extends Fragment{
             newItem.add(item);
         }
         newsItem.addAll(0,newItem);
-        tabAdapter.notifyDataSetChanged();
+        mTabRecyclerviewAdapter.notifyDataSetChanged();
     }
 
 
