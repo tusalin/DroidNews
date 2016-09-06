@@ -1,5 +1,7 @@
 package com.tusalin.droidnews.Fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -42,6 +44,7 @@ public class ArticalFragment extends Fragment{
     private GankNews articals;
     private GankNews girls;
     private int lastVisibleItem;
+    private Activity mActivity;
 
     public ArticalFragment(){
         super();
@@ -66,6 +69,12 @@ public class ArticalFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_artical,container,false);
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mActivity = (Activity) context;
     }
 
     @Override
@@ -153,7 +162,7 @@ public class ArticalFragment extends Fragment{
 
         @Override
         public void retrofitFailure(String keyType, String error) {
-            Toast.makeText(getContext(),error,Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity,error,Toast.LENGTH_SHORT).show();
             swipeRefreshLayout.setRefreshing(false);
         }
     };
