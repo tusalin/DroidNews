@@ -10,12 +10,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.tusalin.droidnews.Adapter.ArticalAdapter;
+import com.tusalin.droidnews.Bean.GankNews;
+import com.tusalin.droidnews.Callback.RetrofitCallBack;
 import com.tusalin.droidnews.FragmentType;
+import com.tusalin.droidnews.Network.DefaultRetrofit;
 import com.tusalin.innews.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.tusalin.droidnews.GankUrl.GANK_API_ANDROID;
+import static com.tusalin.droidnews.GankUrl.GANK_API_MEIZI;
 import static com.tusalin.droidnews.GankUrl.GANK_API_TUIJIAN;
 import static com.tusalin.droidnews.GankUrl.GANK_API_TUOZHAN;
 
@@ -23,7 +31,7 @@ import static com.tusalin.droidnews.GankUrl.GANK_API_TUOZHAN;
  * Created by tusalin on 9/6/2016.
  */
 
-public class ArticalFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class ArticalFragment extends Fragment{
 
     private String keyType;
     private FragmentType fragmentType;
@@ -31,7 +39,13 @@ public class ArticalFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView.LayoutManager layoutManager;
     private ArticalAdapter articalAdapter;
+    private int contentQuantity = 10;
+    private GankNews articals;
+    private GankNews girls;
 
+    public ArticalFragment(){
+        super();
+    }
     public ArticalFragment(FragmentType type){
         fragmentType = type;
         switch (type){
@@ -59,25 +73,52 @@ public class ArticalFragment extends Fragment implements SwipeRefreshLayout.OnRe
         super.onViewCreated(view, savedInstanceState);
         recyclerview = (RecyclerView) view.findViewById(R.id.artical_recyclerview);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.artical_swiperefresh);
-        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                requestGank();
+            }
+        });
         setAdapter();
         setDefaultLayoutManager();
         recyclerview.setAdapter(articalAdapter);
         recyclerview.setLayoutManager(layoutManager);
     }
 
-    @Override
-    public void onRefresh() {
 
-    }
-
-    public void requestGank(boolean isrRefresh){
+    public void requestGank(){
         swipeRefreshLayout.measure(View.MEASURED_SIZE_MASK,View.MEASURED_HEIGHT_STATE_SHIFT);
         swipeRefreshLayout.setRefreshing(true);
+//        contentQuantity += 10;
+        DefaultRetrofit.getAllResult(keyType,contentQuantity,1,retrofitCallBack);
+
     }
 
+    RetrofitCallBack<GankNews> retrofitCallBack = new RetrofitCallBack<GankNews>() {
+        @Override
+        public void retrofitSuccess(String keyType, GankNews news) {
+            if (!keyType.equals(GANK_API_MEIZI)){
+                articals = news;
+                articalAdapter.setArticalResults(articals);
+                DefaultRetrofit.getAllResult(GANK_API_MEIZI,contentQuantity,1,retrofitCallBack);
+            } else {
+                girls = news;
+                articalAdapter.setGirlResults(girls);
+                articalAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }
+
+        @Override
+        public void retrofitFailure(String keyType, String error) {
+            Toast.makeText(getContext(),error,Toast.LENGTH_SHORT).show();
+            swipeRefreshLayout.setRefreshing(false);
+        }
+    };
+
     public void setAdapter(){
-        articalAdapter = new ArticalAdapter(fragmentType);
+        articalAdapter = new ArticalAdapter(fragmentType,getContext());
     }
 
     public void setDefaultLayoutManager(){

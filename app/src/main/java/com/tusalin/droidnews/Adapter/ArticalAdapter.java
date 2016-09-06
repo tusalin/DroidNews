@@ -1,5 +1,6 @@
 package com.tusalin.droidnews.Adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,10 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.tusalin.droidnews.Bean.GankNews;
 import com.tusalin.droidnews.FragmentType;
 import com.tusalin.innews.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,11 +23,13 @@ import java.util.List;
 public class ArticalAdapter extends RecyclerView.Adapter<ArticalAdapter.ArticalViewHolder> {
 
     private FragmentType fragmentType;
-    private List<GankNews.Results> articalResults;
-    private List<GankNews.Results> girlResults;
+    private List<GankNews.Results> articalResults = new ArrayList<>();
+    private List<GankNews.Results> girlResults = new ArrayList<>();
+    private Context context;
 
-    public ArticalAdapter(FragmentType type){
+    public ArticalAdapter(FragmentType type, Context context){
         fragmentType = type;
+        this.context = context;
     }
 
     public void setArticalResults(GankNews gankNews){
@@ -39,17 +44,28 @@ public class ArticalAdapter extends RecyclerView.Adapter<ArticalAdapter.ArticalV
 
     @Override
     public int getItemCount() {
-//        return articalResults.size();
-        return 20;
+       return articalResults.size();
+//        return 20;
     }
 
     @Override
     public void onBindViewHolder(ArticalViewHolder holder, int position) {
- /*       GankNews.Results artical = articalResults.get(position);
-        GankNews.Results girl = girlResults.get((int) (Math.random()*girlResults.size()));*/
-        holder.textViewTitle.setText("a_grid_text");
+        GankNews.Results artical = articalResults.get(position);
+        GankNews.Results girl = girlResults.get((int) (Math.random()*girlResults.size()));
+       /* holder.textViewTitle.setText("a_grid_text");
         holder.textViewDate.setText("grid_date");
-        holder.imageView.setImageResource(R.drawable.ic_menu_user);
+        holder.imageView.setImageResource(R.drawable.ic_menu_user);*/
+        holder.textViewDate.setText(artical.getCreatedAt().substring(0,10));
+        holder.textViewTitle.setText(artical.getDesc());
+        String girlsUrl = girl.getUrl();
+        Picasso.with(context)
+                .load(girlsUrl)
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.error)
+                .fit()
+                .centerCrop()
+                .tag(holder.imageView.getContext())
+                .into(holder.imageView);
     }
 
     @Override

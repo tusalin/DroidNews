@@ -23,12 +23,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="3"
+                android:maxLines="2"
                 android:text="grid_title"
-                android:textSize="@dimen/text_20"
-                android:layout_marginLeft="@dimen/margin_10"
-                android:layout_marginTop="@dimen/margin_10"
-                android:id="@+id/cardview_artical_title"/>
+                android:textSize="16sp"
+                android:padding="@dimen/margin_10"
+                android:id="@+id/cardview_artical_title"
+                android:textColor="#fff"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,9 +36,10 @@
                 android:text="grid_date"
                 android:textSize="@dimen/text_15"
                 android:layout_alignParentRight="true"
-                android:paddingRight="@dimen/margin_15"
-                android:paddingBottom="@dimen/margin_10"
-                android:id="@+id/cardview_artical_date"/>
+                android:paddingRight="@dimen/margin_10"
+                android:paddingBottom="@dimen/margin_5"
+                android:id="@+id/cardview_artical_date"
+                android:textColor="#fff"/>
         </RelativeLayout>
     </RelativeLayout>
 
