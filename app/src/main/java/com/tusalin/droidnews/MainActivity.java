@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.menu_home:
                         homeFragment = new HomeFragment();
                         fragmentTransaction.replace(R.id.framelaoyout,homeFragment);
-                        toobar.setTitle("Tablayout");
+                        toobar.setTitle("Gank News");
                         break;
                     case R.id.menu_technology:
                         technologyFragment = new TechnologyFragment();

@@ -2,8 +2,10 @@ package com.tusalin.droidnews.Fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -18,10 +20,13 @@ import com.tusalin.droidnews.Adapter.ArticalAdapter;
 import com.tusalin.droidnews.Bean.GankNews;
 import com.tusalin.droidnews.Callback.OnRecyclerViewItemClickListener;
 import com.tusalin.droidnews.Callback.RetrofitCallBack;
+import com.tusalin.droidnews.DetailActivity;
 import com.tusalin.droidnews.FragmentType;
 import com.tusalin.droidnews.Network.DefaultRetrofit;
 import com.tusalin.innews.R;
 
+
+import java.io.Serializable;
 
 import static com.tusalin.droidnews.GankUrl.GANK_API_ANDROID;
 import static com.tusalin.droidnews.GankUrl.GANK_API_MEIZI;
@@ -93,7 +98,7 @@ public class ArticalFragment extends Fragment{
         articalAdapter.setOnRecyclerViewItemClick(new OnRecyclerViewItemClickListener() {
             @Override
             public void onRecyclerViewItemClick(ArticalAdapter.ArticalViewHolder viewHolder, int position, View view) {
-                Toast.makeText(getContext(),"click "+ position,Toast.LENGTH_SHORT).show();
+                startDetailActivity(position);
             }
         });
         recyclerview.setAdapter(articalAdapter);
@@ -112,6 +117,13 @@ public class ArticalFragment extends Fragment{
                 lastVisibleItem = findLastVisibleItem();
             }
         });
+    }
+
+    private void startDetailActivity(int position) {
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        intent.putExtra("girls", girls.getResults().get(position));
+        intent.putExtra("articals",articals.getResults().get(position));
+        startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity()).toBundle());
     }
 
     private int findLastVisibleItem() {
