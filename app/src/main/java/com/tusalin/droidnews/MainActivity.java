@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.tusalin.droidnews.Fragment.ArticalFragment;
-import com.tusalin.droidnews.Fragment.EntertainmentFragment;
 import com.tusalin.droidnews.Fragment.HomeFragment;
 import com.tusalin.droidnews.Fragment.TechnologyFragment;
 import com.tusalin.innews.R;
@@ -26,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
     private NavigationView navigationview;
     private TechnologyFragment technologyFragment;
-    private EntertainmentFragment entertainmentFragment;
     private ArticalFragment articalFragment;
 
 
@@ -74,12 +72,6 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.replace(R.id.framelaoyout,technologyFragment);
                         toobar.setTitle("Technology");
                         break;
-                    case R.id.menu_entertainment:
-                        entertainmentFragment = new EntertainmentFragment();
-                        fragmentTransaction.replace(R.id.framelaoyout,entertainmentFragment);
-                        toobar.setTitle("Entertainment");
-                        break;
-
                 }
                 fragmentTransaction.commit();
                 item.setChecked(true);

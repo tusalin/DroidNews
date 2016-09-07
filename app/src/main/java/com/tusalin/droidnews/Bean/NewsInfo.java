@@ -1,10 +1,12 @@
 package com.tusalin.droidnews.Bean;
 
+import java.io.Serializable;
+
 /**
  * Created by tusalin on 9/5/2016.
  */
 
-public class NewsInfo {
+public class NewsInfo implements Serializable{
     private String newsTitle;
     private String newsDate;
     private String newsUrl;

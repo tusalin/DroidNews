@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.tusalin.droidnews.DetailActivity"></activity>
+        <activity android:name="com.tusalin.droidnews.DrawerNewsDetailActivity"></activity>
     </application>
 
 </manifest>

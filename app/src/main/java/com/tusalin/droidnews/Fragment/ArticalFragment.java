@@ -25,9 +25,6 @@ import com.tusalin.droidnews.FragmentType;
 import com.tusalin.droidnews.Network.DefaultRetrofit;
 import com.tusalin.innews.R;
 
-
-import java.io.Serializable;
-
 import static com.tusalin.droidnews.GankUrl.GANK_API_ANDROID;
 import static com.tusalin.droidnews.GankUrl.GANK_API_MEIZI;
 import static com.tusalin.droidnews.GankUrl.GANK_API_TUIJIAN;
@@ -97,7 +94,7 @@ public class ArticalFragment extends Fragment{
         setDefaultLayoutManager();
         articalAdapter.setOnRecyclerViewItemClick(new OnRecyclerViewItemClickListener() {
             @Override
-            public void onRecyclerViewItemClick(ArticalAdapter.ArticalViewHolder viewHolder, int position, View view) {
+            public void onRecyclerViewItemClick(int position, View view) {
                 startDetailActivity(position);
             }
         });

@@ -2,8 +2,10 @@ package com.tusalin.droidnews;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -31,6 +33,7 @@ public class DetailActivity extends AppCompatActivity {
     private ImageView detailImage;
     private ProgressBar progressBar;
     private WebView webview;
+    private FloatingActionButton fab;
 
 
     @Override
@@ -68,6 +71,14 @@ public class DetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 onBackPressed();
                 webview.setVisibility(View.GONE);
+            }
+        });
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(articalsData.getUrl()));
+                startActivity(intent);
             }
         });
     }

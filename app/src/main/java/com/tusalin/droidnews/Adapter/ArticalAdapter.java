@@ -108,8 +108,7 @@ public class ArticalAdapter extends RecyclerView.Adapter<ArticalAdapter.ArticalV
                 @Override
                 public void onClick(View view) {
                     if (onItemClickListener!=null){
-                        onItemClickListener.onRecyclerViewItemClick(ArticalViewHolder.this,
-                                getLayoutPosition(),view);
+                        onItemClickListener.onRecyclerViewItemClick(getLayoutPosition(),view);
                     }
                 }
             });

@@ -52,8 +52,8 @@ public class HomeFragment extends Fragment {
     private void setupViewPager() {
         HomeAdapter homeAdapter = new HomeAdapter(getChildFragmentManager());
         homeAdapter.addFragment(new ArticalFragment(FragmentType.Android),"Andriod");
-        homeAdapter.addFragment(new ArticalFragment(FragmentType.xiatuijian),"Tuijian");
-        homeAdapter.addFragment(new ArticalFragment(FragmentType.tuozhanziyuan),"tuozhan");
+        homeAdapter.addFragment(new ArticalFragment(FragmentType.xiatuijian),"Recommand");
+        homeAdapter.addFragment(new ArticalFragment(FragmentType.tuozhanziyuan),"Expand");
         viewPager.setAdapter(homeAdapter);
     }
 

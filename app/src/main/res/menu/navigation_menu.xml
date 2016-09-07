@@ -14,7 +14,8 @@
         <item
             android:title="Entertainment"
             android:id="@+id/menu_entertainment"
-            android:icon="@drawable/icon_entertainment"></item>
+            android:icon="@drawable/icon_entertainment"
+            android:visible="false"></item>
         <item
             android:title="Me">
             <menu>
