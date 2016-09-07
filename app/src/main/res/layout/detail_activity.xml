@@ -50,7 +50,7 @@
             android:orientation="vertical">
             <ProgressBar
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="4dp"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:visibility="invisible"
                 android:id="@+id/detail_progressbar"
@@ -62,5 +62,14 @@
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/margin_20"
+        android:src="@drawable/chrome"
+        android:background="@color/skyblue"
+        app:useCompatPadding="true"/>
 
 </android.support.design.widget.CoordinatorLayout>
