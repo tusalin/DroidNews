@@ -20,7 +20,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/framelaoyout"
-            ></FrameLayout>
+            android:background="@drawable/login_bg1">
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="com.tusalin.droidnews.Fragment.HomeFragment"
+                android:id="@+id/fragment_home"></fragment>
+        </FrameLayout>
     </LinearLayout>
 
     <android.support.design.widget.NavigationView

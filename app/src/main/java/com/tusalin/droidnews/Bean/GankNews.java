@@ -1,6 +1,8 @@
 package com.tusalin.droidnews.Bean;
 
 
+import com.tusalin.droidnews.GankUrl;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class GankNews {
     }
 
     public class Results implements Serializable{
-        private String id;
+        private String _id;
         private String createdAt;
         private String desc;
         private String publishAt;
@@ -39,12 +41,29 @@ public class GankNews {
         private String used;
         private String who;
 
-        public String getId() {
-            return id;
+        private String title;
+
+        public String getTitle(String type){
+            switch (type){
+                case GankUrl.GANK_API_ANDROID:
+                    title = "Android";
+                    break;
+                case GankUrl.GANK_API_TUIJIAN:
+                    title = "Recommend";
+                    break;
+                case GankUrl.GANK_API_TUOZHAN:
+                    title = "Expand";
+                    break;
+            }
+            return title;
         }
 
-        public void setId(String id) {
-            this.id = id;
+        public String get_Id() {
+            return _id;
+        }
+
+        public void set_Id(String _id) {
+            this._id = _id;
         }
 
         public String getCreatedAt() {
