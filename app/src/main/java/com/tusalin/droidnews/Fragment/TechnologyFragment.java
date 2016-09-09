@@ -3,11 +3,11 @@ package com.tusalin.droidnews.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,21 +41,27 @@ public class TechnologyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_technology,container,false);
         recyclerview = (RecyclerView) view.findViewById(R.id.recyclerview_technology);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh_technology);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                requestJiemianByVolleyRequest();
+            }
+        });
         recyclerview.setLayoutManager(linearLayoutManager);
-//        requestData();
         requestJiemianByVolleyRequest();
         technologyAdapter = new TechnologyAdapter(getContext(), technologyNewsInfo);
-
         technologyAdapter.setOnRecyclerViewItemClick(new OnRecyclerViewItemClickListener() {
             @Override
             public void onRecyclerViewItemClick(int position, View view) {
                 startDetailActivity(position);
-//                Toast.makeText(getActivity(),"click technology "+(position + 1),Toast.LENGTH_SHORT).show();
             }
         });
         recyclerview.setAdapter(technologyAdapter);
         return view;
     }
+
 
     public void startDetailActivity(int position){
         Intent intent = new Intent(getActivity(), DrawerNewsDetailActivity.class);
@@ -66,25 +72,15 @@ public class TechnologyFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        requestJiemianByVolleyRequest();
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh_technology);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-                requestJiemianByVolleyRequest();
-            }
-        });
+//        super.onViewCreated(view, savedInstanceState);
+            requestJiemianByVolleyRequest();
+            technologyAdapter.addData(technologyNewsInfo);
     }
-
 
     public void requestJiemianByVolleyRequest(){
         VolleyRequest.requetJiemian(TECHNOLOGY_URL,getActivity().getApplicationContext(), new HtmlCallback() {
             @Override
             public void onSuccessParseHtml(List<NewsInfo> newsInfos) {
-              /*  Log.d("onSuccessParsehtml",newsInfos.toString());
-                Log.d("technologyNewsInfo Size", String.valueOf(newsInfos.size()));*/
                 if (swipeRefreshLayout.isRefreshing()){
                     swipeRefreshLayout.setRefreshing(false);
                 }
@@ -96,7 +92,7 @@ public class TechnologyFragment extends Fragment {
 
             @Override
             public void onFailedParseHtml() {
-                Log.d("onFailedParseHtml","html paser error");
+                Snackbar.make(recyclerview,"parse html failed",Snackbar.LENGTH_SHORT).show();
             }
         });
     }

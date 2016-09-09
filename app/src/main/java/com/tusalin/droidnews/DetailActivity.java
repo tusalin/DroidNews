@@ -54,7 +54,6 @@ public class DetailActivity extends AppCompatActivity {
                 .error(R.drawable.error)
                 .into(detailImage);
         collapsingToobar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-//        collapsingToobar.setTitle(articalsData.getType());
         collapsingToobar.setTitle(articalsData.getTitle(articalsData.getType()));
         collapsingToobar.setExpandedTitleTextColor(ColorStateList.valueOf(getResources().getColor(R.color.black)));
         collapsingToobar.setExpandedTitleColor(getResources().getColor(R.color.purple));

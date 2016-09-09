@@ -28,12 +28,10 @@ public class VolleyRequest {
 
     public static void requetJiemian(String url,Context context, final HtmlCallback htmlCallback){
         RequestQueue mRequestquue = Volley.newRequestQueue(context);
-//        Log.d("VolleyRequest url",url);
         StringRequest stringRequest = new StringRequest(url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-//                        Log.d("onResponse",response);
                         parseHtml(response);
                         htmlCallback.onSuccessParseHtml(newsInfo);
                     }
@@ -42,7 +40,6 @@ public class VolleyRequest {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         htmlCallback.onFailedParseHtml();
-//                        Log.d("VolleyError",error.getMessage());
                     }
                 });
         mRequestquue.add(stringRequest);
@@ -55,14 +52,12 @@ public class VolleyRequest {
             public void run() {
                 Document document = Jsoup.parse(response);
                 Elements elements = document.select(".news-view").select(".left");
-//                Log.d("document",elements.toString());
                 parseElementsToList(elements,newsInfo);
-//                Log.d("newsInfos",newsInfo.toString());
             }
         }).start();
     }
 
-    public static void parseElementsToList(Elements elements, List<NewsInfo> feedList) {
+    public static void parseElementsToList(Elements elements, List<NewsInfo> list) {
         if ( elements.size() > 0) {
             for (int i = 0; i < elements.size(); i++) {
                 NewsInfo item = new NewsInfo();
@@ -78,8 +73,7 @@ public class VolleyRequest {
                     item.setNewsUrl(elementTitle.attr("href"));
                     item.setNewsImageUrl(elementImageUrl.attr("src"));
                     item.setNewsDate(elementDate.text());
-                    feedList.add(item);
-//                    Log.d("feedList",feedList.toString());
+                    list.add(item);
                 }
             }
 

@@ -13,9 +13,6 @@ import com.tusalin.droidnews.Adapter.HomeAdapter;
 import com.tusalin.droidnews.FragmentType;
 import com.tusalin.innews.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by tusalin on 9/4/2016.
  */
@@ -23,9 +20,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private TabLayout tablayout;
-    private List<String> tabTitle = new ArrayList<>();
     private ViewPager viewPager;
-    private HomeAdapter adapter;
 
 
     @Nullable
@@ -41,14 +36,15 @@ public class HomeFragment extends Fragment {
         tablayout = (TabLayout) view.findViewById(R.id.tablayout);
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(3);
+
         if (viewPager!=null){
+
             setupViewPager();
         }
 
         tablayout.setupWithViewPager(viewPager);
         tablayout.setTabMode(TabLayout.MODE_FIXED);
     }
-
     private void setupViewPager() {
         HomeAdapter homeAdapter = new HomeAdapter(getChildFragmentManager());
         homeAdapter.addFragment(new ArticalFragment(FragmentType.Android),"Andriod");

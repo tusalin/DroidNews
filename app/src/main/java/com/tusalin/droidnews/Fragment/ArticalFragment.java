@@ -131,6 +131,8 @@ public class ArticalFragment extends Fragment{
                 lastVisibleItemPosition = ((LinearLayoutManager)layoutManager).findLastVisibleItemPosition();
                 break;
             case xiatuijian:
+                lastVisibleItemPosition = ((GridLayoutManager)layoutManager).findLastVisibleItemPosition();
+                break;
             case tuozhanziyuan:
                 lastVisibleItemPosition = ((GridLayoutManager)layoutManager).findLastVisibleItemPosition();
                 break;
@@ -140,13 +142,14 @@ public class ArticalFragment extends Fragment{
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+       swipeRefreshLayout.setRefreshing(true);
         requestGank(false);
+        super.onActivityCreated(savedInstanceState);
     }
 
     public void requestGank(boolean loadMore){
         swipeRefreshLayout.measure(View.MEASURED_SIZE_MASK,View.MEASURED_HEIGHT_STATE_SHIFT);
-        swipeRefreshLayout.setRefreshing(true);
+//        swipeRefreshLayout.setRefreshing(true);
         if (loadMore){
             contentQuantity += 10;
         }
