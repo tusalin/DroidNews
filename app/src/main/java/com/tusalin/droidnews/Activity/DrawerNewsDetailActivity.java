@@ -1,4 +1,4 @@
-package com.tusalin.droidnews;
+package com.tusalin.droidnews.Activity;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;

@@ -52,7 +52,7 @@ public class ArticalAdapter extends RecyclerView.Adapter<ArticalAdapter.ArticalV
     @Override
     public void onBindViewHolder(ArticalViewHolder holder, int position) {
         GankNews.Results artical = articalResults.get(position);
-        GankNews.Results girl = girlResults.get((int) (Math.random()*girlResults.size()));
+        GankNews.Results girl  = girlResults.get((int) (Math.random()*girlResults.size()));
         holder.textViewDate.setText(artical.getCreatedAt().substring(0,10));
         holder.textViewTitle.setText(artical.getDesc());
         String girlsUrl = girl.getUrl();

@@ -20,9 +20,9 @@ import com.tusalin.droidnews.Adapter.ArticalAdapter;
 import com.tusalin.droidnews.Bean.GankNews;
 import com.tusalin.droidnews.Callback.OnRecyclerViewItemClickListener;
 import com.tusalin.droidnews.Callback.RetrofitCallBack;
-import com.tusalin.droidnews.DetailActivity;
+import com.tusalin.droidnews.Activity.DetailActivity;
 import com.tusalin.droidnews.FragmentType;
-import com.tusalin.droidnews.Network.DefaultRetrofit;
+import com.tusalin.droidnews.Network.GankRetrofit;
 import com.tusalin.innews.R;
 
 import static com.tusalin.droidnews.GankUrl.GANK_API_ANDROID;
@@ -142,7 +142,7 @@ public class ArticalFragment extends Fragment{
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-       swipeRefreshLayout.setRefreshing(true);
+        swipeRefreshLayout.setRefreshing(true);
         requestGank(false);
         super.onActivityCreated(savedInstanceState);
     }
@@ -153,7 +153,7 @@ public class ArticalFragment extends Fragment{
         if (loadMore){
             contentQuantity += 10;
         }
-        DefaultRetrofit.getAllResult(keyType,contentQuantity,1,retrofitCallBack);
+        GankRetrofit.getAllResult(keyType,contentQuantity,1,retrofitCallBack);
 
     }
 
@@ -163,7 +163,7 @@ public class ArticalFragment extends Fragment{
             if (!keyType.equals(GANK_API_MEIZI)){
                 articals = news;
                 articalAdapter.setArticalResults(articals);
-                DefaultRetrofit.getAllResult(GANK_API_MEIZI,contentQuantity,1,retrofitCallBack);
+                GankRetrofit.getAllResult(GANK_API_MEIZI,contentQuantity,1,retrofitCallBack);
             } else {
                 girls = news;
                 articalAdapter.setGirlResults(girls);

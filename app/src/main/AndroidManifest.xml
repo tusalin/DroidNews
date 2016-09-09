@@ -11,15 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar"
         android:name="com.tusalin.droidnews.MyApplication">
-        <activity android:name="com.tusalin.droidnews.MainActivity">
+        <activity android:name="com.tusalin.droidnews.Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.tusalin.droidnews.DetailActivity"></activity>
-        <activity android:name="com.tusalin.droidnews.DrawerNewsDetailActivity"></activity>
+        <activity android:name="com.tusalin.droidnews.Activity.DetailActivity"></activity>
+        <activity android:name="com.tusalin.droidnews.Activity.DrawerNewsDetailActivity"></activity>
+        <activity android:name="com.tusalin.droidnews.Activity.AboutActivity"></activity>
     </application>
 
 </manifest>

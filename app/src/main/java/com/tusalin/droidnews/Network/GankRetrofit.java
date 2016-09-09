@@ -25,16 +25,13 @@ import retrofit2.Retrofit;
  * Created by tusalin on 9/6/2016.
  */
 
-public class DefaultRetrofit {
+public class GankRetrofit {
 
+     static File cacheDirectory = new File(MyApplication.getContext().getCacheDir(),"response");
+     static int cacheSize = 10 * 1024 * 1024;
+     static Cache cache = new Cache(cacheDirectory,cacheSize);
 
-
-
-    static File cacheDirectory = new File(MyApplication.getContext().getCacheDir(),"response");
-    static int cacheSize = 10 * 1024 * 1024;
-    static Cache cache = new Cache(cacheDirectory,cacheSize);
-
-    static Interceptor interceptor = new Interceptor() {
+     static Interceptor interceptor = new Interceptor() {
         @Override
         public okhttp3.Response intercept(Chain chain) throws IOException {
 
@@ -50,12 +47,12 @@ public class DefaultRetrofit {
             okhttp3.Response response = chain.proceed(request);
             Log.d("response = ", response.toString());
             /*return response.newBuilder()
-                    .header("cacheControl","public,max-age=" + 60 * 60 * 4)
+                    .header("Cache-Control","public,max-age=" + 60 * 60 * 4)
                     .removeHeader("Pragma")
                     .build();*/
             String cacheControl = request.cacheControl().toString();
             if (TextUtils.isEmpty(cacheControl)){
-                cacheControl = "public,max-age=60*60*8";
+                cacheControl = "public,max-age=60*60*24";
             }
             return response.newBuilder()
                     .header("Cache-Control",cacheControl)
@@ -63,10 +60,11 @@ public class DefaultRetrofit {
                     .build();
         }
     };
-    static OkHttpClient okHttpClient = new OkHttpClient.Builder()
+      static OkHttpClient okHttpClient = new OkHttpClient.Builder()
             .addNetworkInterceptor(interceptor)
             .cache(cache)   //  cache must be added after addNetworkInterceptor()!!
             .build();
+
 
     public static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(GankUrl.GANK_API_URL)
@@ -89,10 +87,8 @@ public class DefaultRetrofit {
 
             @Override
             public void onFailure(Call<GankNews> call, Throwable t) {
-                retrofitCallBack.retrofitFailure(keyType,"call.enqueue onFailure:" + t.getMessage());
+                retrofitCallBack.retrofitFailure(keyType,"onFailure:" + t.getMessage());
             }
         });
     }
-
-
 }

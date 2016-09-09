@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_20"
+        android:text="Developer: Vin Tusalin"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="40dp"
+        android:id="@+id/text_developer"
+        android:textColor="@color/purple"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_20"
+        android:text="Phone: 18826424471"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="@dimen/margin_15"
+        android:layout_below="@id/text_developer"
+        android:id="@+id/text_phone"
+        android:textColor="@color/purple"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_20"
+        android:text="Mail: zhanqianlin@gmail.com"
+        android:layout_marginTop="@dimen/margin_15"
+        android:layout_marginLeft="40dp"
+        android:layout_below="@id/text_phone"
+        android:id="@+id/text_mail"
+        android:textColor="@color/purple"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_20"
+        android:text="Github: https://github.com/tusalin"
+        android:layout_marginTop="@dimen/margin_15"
+        android:layout_marginLeft="40dp"
+        android:layout_below="@id/text_mail"
+        android:textColor="@color/purple"
+        android:id="@+id/text_github"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_20"
+        android:text="School: Guangzhou University"
+        android:layout_marginTop="@dimen/margin_15"
+        android:layout_marginLeft="40dp"
+        android:layout_below="@id/text_github"
+        android:textColor="@color/purple"/>
+
+</RelativeLayout>

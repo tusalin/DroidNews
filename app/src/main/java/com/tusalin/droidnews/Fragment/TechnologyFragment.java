@@ -16,7 +16,7 @@ import com.tusalin.droidnews.Adapter.TechnologyAdapter;
 import com.tusalin.droidnews.Bean.NewsInfo;
 import com.tusalin.droidnews.Callback.HtmlCallback;
 import com.tusalin.droidnews.Callback.OnRecyclerViewItemClickListener;
-import com.tusalin.droidnews.DrawerNewsDetailActivity;
+import com.tusalin.droidnews.Activity.DrawerNewsDetailActivity;
 import com.tusalin.droidnews.Network.VolleyRequest;
 import com.tusalin.innews.R;
 
@@ -75,6 +75,12 @@ public class TechnologyFragment extends Fragment {
 //        super.onViewCreated(view, savedInstanceState);
             requestJiemianByVolleyRequest();
             technologyAdapter.addData(technologyNewsInfo);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        requestJiemianByVolleyRequest();
+        super.onActivityCreated(savedInstanceState);
     }
 
     public void requestJiemianByVolleyRequest(){

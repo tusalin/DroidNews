@@ -1,5 +1,6 @@
-package com.tusalin.droidnews;
+package com.tusalin.droidnews.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -97,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(drawerlayout,"click setting",Snackbar.LENGTH_SHORT).show();
                 break;
             case R.id.menu_about:
+                Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(intent);
                 Snackbar.make(drawerlayout,"ckick about",Snackbar.LENGTH_SHORT).show();
                 break;
         }
