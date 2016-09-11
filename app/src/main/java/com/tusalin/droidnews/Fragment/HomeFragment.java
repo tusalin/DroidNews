@@ -38,7 +38,6 @@ public class HomeFragment extends Fragment {
         viewPager.setOffscreenPageLimit(3);
 
         if (viewPager!=null){
-
             setupViewPager();
         }
 
@@ -58,5 +57,4 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
-
 }

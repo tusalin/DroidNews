@@ -34,16 +34,6 @@
         android:id="@+id/text_mail"
         android:textColor="@color/purple"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_20"
-        android:text="Github: https://github.com/tusalin"
-        android:layout_marginTop="@dimen/margin_15"
-        android:layout_marginLeft="40dp"
-        android:layout_below="@id/text_mail"
-        android:textColor="@color/purple"
-        android:id="@+id/text_github"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -52,7 +42,7 @@
         android:text="School: Guangzhou University"
         android:layout_marginTop="@dimen/margin_15"
         android:layout_marginLeft="40dp"
-        android:layout_below="@id/text_github"
+        android:layout_below="@id/text_mail"
         android:textColor="@color/purple"/>
 
 </RelativeLayout>

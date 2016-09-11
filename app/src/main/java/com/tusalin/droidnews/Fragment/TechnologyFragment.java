@@ -12,11 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tusalin.droidnews.Activity.DrawerNewsDetailActivity;
 import com.tusalin.droidnews.Adapter.TechnologyAdapter;
 import com.tusalin.droidnews.Bean.NewsInfo;
 import com.tusalin.droidnews.Callback.HtmlCallback;
 import com.tusalin.droidnews.Callback.OnRecyclerViewItemClickListener;
-import com.tusalin.droidnews.Activity.DrawerNewsDetailActivity;
+import com.tusalin.droidnews.MyApplication;
 import com.tusalin.droidnews.Network.VolleyRequest;
 import com.tusalin.innews.R;
 
@@ -40,25 +41,7 @@ public class TechnologyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_technology,container,false);
-        recyclerview = (RecyclerView) view.findViewById(R.id.recyclerview_technology);
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh_technology);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-                requestJiemianByVolleyRequest();
-            }
-        });
-        recyclerview.setLayoutManager(linearLayoutManager);
-        requestJiemianByVolleyRequest();
-        technologyAdapter = new TechnologyAdapter(getContext(), technologyNewsInfo);
-        technologyAdapter.setOnRecyclerViewItemClick(new OnRecyclerViewItemClickListener() {
-            @Override
-            public void onRecyclerViewItemClick(int position, View view) {
-                startDetailActivity(position);
-            }
-        });
-        recyclerview.setAdapter(technologyAdapter);
+
         return view;
     }
 
@@ -73,18 +56,36 @@ public class TechnologyFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 //        super.onViewCreated(view, savedInstanceState);
+        recyclerview = (RecyclerView) view.findViewById(R.id.recyclerview_technology);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh_technology);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                requestJiemianByVolleyRequest();
+            }
+        });
+        recyclerview.setLayoutManager(linearLayoutManager);
+//        requestJiemianByVolleyRequest();
+        technologyAdapter = new TechnologyAdapter(getContext(), technologyNewsInfo);
+        technologyAdapter.setOnRecyclerViewItemClick(new OnRecyclerViewItemClickListener() {
+            @Override
+            public void onRecyclerViewItemClick(int position, View view) {
+                startDetailActivity(position);
+            }
+        });
+        recyclerview.setAdapter(technologyAdapter);
             requestJiemianByVolleyRequest();
             technologyAdapter.addData(technologyNewsInfo);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        requestJiemianByVolleyRequest();
         super.onActivityCreated(savedInstanceState);
     }
 
     public void requestJiemianByVolleyRequest(){
-        VolleyRequest.requetJiemian(TECHNOLOGY_URL,getActivity().getApplicationContext(), new HtmlCallback() {
+        VolleyRequest.requetJiemian(TECHNOLOGY_URL, MyApplication.getContext(), new HtmlCallback() {
             @Override
             public void onSuccessParseHtml(List<NewsInfo> newsInfos) {
                 if (swipeRefreshLayout.isRefreshing()){

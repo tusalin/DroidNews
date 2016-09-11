@@ -62,9 +62,11 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 switch (item.getItemId()){
                     case R.id.menu_home:
-                        if (initFragment == null){
+                        if (initFragment != null){
+                            getSupportFragmentManager().beginTransaction().show(initFragment).commit();
+                        }else {
                             homeFragment = new HomeFragment();
-                            fragmentTransaction.replace(R.id.framelaoyout,homeFragment);
+                            fragmentTransaction.replace(R.id.framelayout,homeFragment);
                             toobar.setTitle("Gank News");
                         }
                         break;
@@ -73,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
                             getSupportFragmentManager().beginTransaction().hide(initFragment).commit();
                         }
                         technologyFragment = new TechnologyFragment();
-                        fragmentTransaction.replace(R.id.framelaoyout,technologyFragment);
+                        fragmentTransaction.replace(R.id.framelayout,technologyFragment);
+//                        fragmentTransaction.show(technologyFragment);
                         toobar.setTitle("Technology");
                         break;
                 }

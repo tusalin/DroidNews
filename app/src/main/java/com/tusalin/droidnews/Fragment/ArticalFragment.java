@@ -160,7 +160,7 @@ public class ArticalFragment extends Fragment{
     RetrofitCallBack<GankNews> retrofitCallBack = new RetrofitCallBack<GankNews>() {
         @Override
         public void retrofitSuccess(String keyType, GankNews news) {
-            if (!keyType.equals(GANK_API_MEIZI)){
+            /*if (!keyType.equals(GANK_API_MEIZI)){
                 articals = news;
                 articalAdapter.setArticalResults(articals);
                 GankRetrofit.getAllResult(GANK_API_MEIZI,contentQuantity,1,retrofitCallBack);
@@ -169,7 +169,18 @@ public class ArticalFragment extends Fragment{
                 articalAdapter.setGirlResults(girls);
                 articalAdapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
+            }*/
+            if (!keyType.equals(GANK_API_MEIZI)){
+                articals = news;
+                articalAdapter.setArticalResults(articals);
+                GankRetrofit.getAllResult(GANK_API_MEIZI, contentQuantity, 1, retrofitCallBack);
+            } else {
+                girls = news;
+                articalAdapter.setGirlResults(girls);
+                articalAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
             }
+
         }
 
         @Override

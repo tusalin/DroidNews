@@ -2,6 +2,7 @@ package com.tusalin.droidnews.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +26,10 @@ public class ArticalAdapter extends RecyclerView.Adapter<ArticalAdapter.ArticalV
 
     private FragmentType fragmentType;
     private List<GankNews.Results> articalResults = new ArrayList<>();
-    private List<GankNews.Results> girlResults = new ArrayList<>();
+    private List<GankNews.Results> girlResults;
     private Context context;
     private OnRecyclerViewItemClickListener mOnRecyclerViewItemClickListener;
+    private GankNews.Results girl;
 
     public ArticalAdapter(FragmentType type, Context context){
         fragmentType = type;
@@ -40,7 +42,8 @@ public class ArticalAdapter extends RecyclerView.Adapter<ArticalAdapter.ArticalV
     }
 
     public void setGirlResults(GankNews gankNews){
-        girlResults.clear();
+//        girlResults.clear();
+        girlResults = new ArrayList<>();
         girlResults.addAll(gankNews.getResults());
     }
 
@@ -52,18 +55,31 @@ public class ArticalAdapter extends RecyclerView.Adapter<ArticalAdapter.ArticalV
     @Override
     public void onBindViewHolder(ArticalViewHolder holder, int position) {
         GankNews.Results artical = articalResults.get(position);
-        GankNews.Results girl  = girlResults.get((int) (Math.random()*girlResults.size()));
+//        int girlSize = girlResults.size();
+//        Log.d("girlSize",girlSize+"");
+        Log.d("articalSize",articalResults.size()+"");
+        /*GankNews.Results girl  = position<girlSize?girlResults.get(position)
+                :girlResults.get((int) (Math.random()*girlResults.size()));*/
+        if (girlResults!= null){
+            girl = girlResults.get((int) (Math.random()*girlResults.size()));
+        }
         holder.textViewDate.setText(artical.getCreatedAt().substring(0,10));
         holder.textViewTitle.setText(artical.getDesc());
-        String girlsUrl = girl.getUrl();
-        Picasso.with(context)
-                .load(girlsUrl)
-                .placeholder(R.drawable.placeholder)
-                .error(R.drawable.error)
-                .fit()
-                .centerCrop()
-                .tag(holder.imageView.getContext())
-                .into(holder.imageView);
+        if (girl != null){
+            String girlsUrl = girl.getUrl();
+            Picasso.with(context)
+                    .load(girlsUrl)
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.error)
+                    .fit()
+                    .centerCrop()
+                    .tag(holder.imageView.getContext())
+                    .into(holder.imageView);
+        }else {
+            holder.imageView.setImageResource(R.drawable.placeholder);
+        }
+
+
     }
 
     @Override

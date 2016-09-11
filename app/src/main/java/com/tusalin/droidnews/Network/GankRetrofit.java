@@ -1,8 +1,5 @@
 package com.tusalin.droidnews.Network;
 
-import android.text.TextUtils;
-import android.util.Log;
-
 import com.tusalin.droidnews.Bean.GankNews;
 import com.tusalin.droidnews.Callback.RetrofitCallBack;
 import com.tusalin.droidnews.GankUrl;
@@ -10,8 +7,10 @@ import com.tusalin.droidnews.MyApplication;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
+import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -27,44 +26,32 @@ import retrofit2.Retrofit;
 
 public class GankRetrofit {
 
-     static File cacheDirectory = new File(MyApplication.getContext().getCacheDir(),"response");
-     static int cacheSize = 10 * 1024 * 1024;
-     static Cache cache = new Cache(cacheDirectory,cacheSize);
-
      static Interceptor interceptor = new Interceptor() {
-        @Override
-        public okhttp3.Response intercept(Chain chain) throws IOException {
+         @Override
+         public okhttp3.Response intercept(Chain chain) throws IOException {
+             CacheControl cacheControl = new CacheControl.Builder()
+                     .maxAge(4, TimeUnit.HOURS)
+                     .maxStale(4,TimeUnit.HOURS)
+                     .build();
+             Request request = chain.request();
+//             request.newBuilder()
+//                     .cacheControl(cacheControl)
+//                     .build();
+             okhttp3.Response response = chain.proceed(request);
 
-            /*CacheControl cacheControl = new CacheControl.Builder()
-                    .maxAge(4, TimeUnit.HOURS)
-                    .maxStale(4,TimeUnit.HOURS)
-                    .build();*/
-            Request request = chain.request();
-            /*request.newBuilder()
-                    .cacheControl(cacheControl)
-                    .build();*/
-            Log.d("request = ",request.toString());
-            okhttp3.Response response = chain.proceed(request);
-            Log.d("response = ", response.toString());
-            /*return response.newBuilder()
-                    .header("Cache-Control","public,max-age=" + 60 * 60 * 4)
-                    .removeHeader("Pragma")
-                    .build();*/
-            String cacheControl = request.cacheControl().toString();
-            if (TextUtils.isEmpty(cacheControl)){
-                cacheControl = "public,max-age=60*60*24";
-            }
-            return response.newBuilder()
-                    .header("Cache-Control",cacheControl)
-                    .removeHeader("Pragma")
-                    .build();
-        }
-    };
-      static OkHttpClient okHttpClient = new OkHttpClient.Builder()
-            .addNetworkInterceptor(interceptor)
-            .cache(cache)   //  cache must be added after addNetworkInterceptor()!!
-            .build();
+             return response.newBuilder()
+                     .header("Cache-Control","public,max-age="+60*60*24)
+//                     .removeHeader("Pragma")
+                     .build();
+         }
+     };
 
+    static Cache cache = new Cache(new File(MyApplication.getContext().getCacheDir(),"picasso-cache"),
+            1024 * 1024 * 10);
+   static OkHttpClient okHttpClient = new OkHttpClient.Builder()
+           .addNetworkInterceptor(interceptor)
+           .cache(cache)
+           .build();
 
     public static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(GankUrl.GANK_API_URL)
@@ -91,4 +78,5 @@ public class GankRetrofit {
             }
         });
     }
+
 }
