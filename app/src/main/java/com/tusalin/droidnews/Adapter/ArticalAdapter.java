@@ -55,11 +55,7 @@ public class ArticalAdapter extends RecyclerView.Adapter<ArticalAdapter.ArticalV
     @Override
     public void onBindViewHolder(ArticalViewHolder holder, int position) {
         GankNews.Results artical = articalResults.get(position);
-//        int girlSize = girlResults.size();
-//        Log.d("girlSize",girlSize+"");
         Log.d("articalSize",articalResults.size()+"");
-        /*GankNews.Results girl  = position<girlSize?girlResults.get(position)
-                :girlResults.get((int) (Math.random()*girlResults.size()));*/
         if (girlResults!= null){
             girl = girlResults.get((int) (Math.random()*girlResults.size()));
         }
@@ -78,8 +74,6 @@ public class ArticalAdapter extends RecyclerView.Adapter<ArticalAdapter.ArticalV
         }else {
             holder.imageView.setImageResource(R.drawable.placeholder);
         }
-
-
     }
 
     @Override

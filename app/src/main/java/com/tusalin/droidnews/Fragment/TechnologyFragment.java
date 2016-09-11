@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.VolleyError;
 import com.tusalin.droidnews.Activity.DrawerNewsDetailActivity;
 import com.tusalin.droidnews.Adapter.TechnologyAdapter;
 import com.tusalin.droidnews.Bean.NewsInfo;
@@ -48,14 +49,12 @@ public class TechnologyFragment extends Fragment {
 
     public void startDetailActivity(int position){
         Intent intent = new Intent(getActivity(), DrawerNewsDetailActivity.class);
-//        intent.putExtra("newsInfo", technologyNewsInfo.get(position));
         intent.putExtra("newsInfo",technologyAdapter.getItem(position));
         startActivity(intent);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
         recyclerview = (RecyclerView) view.findViewById(R.id.recyclerview_technology);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh_technology);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -66,7 +65,6 @@ public class TechnologyFragment extends Fragment {
             }
         });
         recyclerview.setLayoutManager(linearLayoutManager);
-//        requestJiemianByVolleyRequest();
         technologyAdapter = new TechnologyAdapter(getContext(), technologyNewsInfo);
         technologyAdapter.setOnRecyclerViewItemClick(new OnRecyclerViewItemClickListener() {
             @Override
@@ -98,8 +96,8 @@ public class TechnologyFragment extends Fragment {
             }
 
             @Override
-            public void onFailedParseHtml() {
-                Snackbar.make(recyclerview,"parse html failed",Snackbar.LENGTH_SHORT).show();
+            public void onFailedParseHtml(VolleyError error) {
+                Snackbar.make(recyclerview,error.getMessage(),Snackbar.LENGTH_SHORT).show();
             }
         });
     }

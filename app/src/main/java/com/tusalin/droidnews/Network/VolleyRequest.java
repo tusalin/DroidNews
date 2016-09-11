@@ -39,7 +39,7 @@ public class VolleyRequest {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        htmlCallback.onFailedParseHtml();
+                        htmlCallback.onFailedParseHtml(error);
                     }
                 });
         mRequestquue.add(stringRequest);

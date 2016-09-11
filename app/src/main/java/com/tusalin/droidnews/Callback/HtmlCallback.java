@@ -1,5 +1,6 @@
 package com.tusalin.droidnews.Callback;
 
+import com.android.volley.VolleyError;
 import com.tusalin.droidnews.Bean.NewsInfo;
 
 import java.util.List;
@@ -10,5 +11,5 @@ import java.util.List;
 
 public interface HtmlCallback {
     public void onSuccessParseHtml(List<NewsInfo> newsInfo);
-    public void onFailedParseHtml();
+    public void onFailedParseHtml(VolleyError error);
 }

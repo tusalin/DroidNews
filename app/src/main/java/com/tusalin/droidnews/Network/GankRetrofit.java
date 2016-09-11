@@ -41,7 +41,7 @@ public class GankRetrofit {
 
              return response.newBuilder()
                      .header("Cache-Control","public,max-age="+60*60*24)
-//                     .removeHeader("Pragma")
+                     .removeHeader("Pragma")
                      .build();
          }
      };
