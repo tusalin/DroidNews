@@ -5,8 +5,8 @@
 ![image](https://github.com/tusalin/DroidNews/raw/master/screenshots/news2.png)
          ![image](https://github.com/tusalin/DroidNews/raw/master/screenshots/news1.png)     
       
-![image](https://github.com/tusalin/DroidNews/raw/master/screenshots/news3.png)     
-         ![image](https://github.com/tusalin/DroidNews/raw/master/screenshots/news4.png)
-      
+![image](https://github.com/tusalin/DroidNews/raw/master/screenshots/news3.png)
+![image](https://github.com/tusalin/DroidNews/raw/master/screenshots/news4.png)
+       
 ![image](https://github.com/tusalin/DroidNews/raw/master/screenshots/news5.png)
   
